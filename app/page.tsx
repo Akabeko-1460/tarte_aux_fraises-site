@@ -296,7 +296,15 @@ export default function Home() {
                 <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg">
                   <span className="text-white font-bold">1</span>
                 </div>
-                <div className="w-full md:w-1/2 md:pl-12"></div>
+                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img
+                      src="/images/tarte_borned.png"
+                      alt="タルトの誕生"
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* いちごの導入 */}
@@ -362,7 +370,15 @@ export default function Home() {
 
               {/* 日本への伝来 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:pr-12"></div>
+                <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img
+                      src="/images/gototartetojapan.png"
+                      alt="日本へのタルト伝来"
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+                </div>
                 <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg">
                   <span className="text-white font-bold">4</span>
                 </div>
@@ -399,7 +415,15 @@ export default function Home() {
                 <div className="hidden md:flex w-12 h-12 bg-gradient-to-r from-rose-400 to-rose-500 rounded-full items-center justify-center z-10 shadow-lg">
                   <Star size={20} className="text-white" fill="currentColor" />
                 </div>
-                <div className="w-full md:w-1/2 md:pl-12"></div>
+                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <img
+                      src="/images/tartefraises.jpg"
+                      alt="現代のタルトフレーズ"
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
