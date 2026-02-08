@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Cake, Coffee, Star } from "lucide-react";
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
   const posts = [
     {
       id: 1,
-      title: "ア・ラ・カンパーニュ：サクサクタルト生地の裏技",
+      title: "ア・ラ・カンパーニュ：フレッシュいちごタルト",
       excerpt:
         "神戸発祥の人気パティスリー。フランスの田舎をイメージした温かみのある空間で、季節のフルーツを使ったタルトが人気。",
       image: "/images/a_la_campagne2_1.JPG",
@@ -121,10 +122,11 @@ export default function Home() {
             {/* Featured / Introduction */}
             <div className="mb-16 bg-white rounded-3xl p-8 shadow-xl shadow-rose-100/50 flex flex-col md:flex-row items-center gap-8 border border-rose-50">
               <div className="w-full md:w-1/2 h-64 md:h-80 relative overflow-hidden rounded-2xl group">
-                <img
+                <Image
                   src="/images/a_la_campagne2_1.JPG"
                   alt="ア・ラ・カンパーニュのタルト"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-rose-500 uppercase tracking-wider">
                   New Arrival
@@ -132,7 +134,7 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2 text-left">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  ア・ラ・カンパーニュ：サクサクタルト生地の裏技
+                  ア・ラ・カンパーニュ：フレッシュいちごタルト
                 </h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   神戸発祥の人気パティスリー。フランスの田舎をイメージした温かみのある空間で、季節のフルーツを使ったタルトが人気。
@@ -153,10 +155,11 @@ export default function Home() {
                   className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-rose-100/50 hover:shadow-2xl hover:shadow-rose-200/50 transition-all duration-300 transform hover:-translate-y-2 border border-rose-50 flex flex-col h-full"
                 >
                   <div className="relative h-56 overflow-hidden">
-                    <img
+                    <Image
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
                     />
                   </div>
 
@@ -198,11 +201,12 @@ export default function Home() {
             </div>
 
             {/* メインビジュアル */}
-            <div className="mb-16 relative overflow-hidden rounded-3xl shadow-2xl shadow-rose-200/50">
-              <img
+            <div className="mb-16 relative overflow-hidden rounded-3xl shadow-2xl shadow-rose-200/50 h-64 md:h-96">
+              <Image
                 src="/images/strawberry_tart_vintage.png"
                 alt="Tarte aux Fraises - Paris"
-                className="w-full h-64 md:h-96 object-cover"
+                fill
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-rose-900/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -233,11 +237,12 @@ export default function Home() {
                   <span className="text-white font-bold">1</span>
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                    <Image
                       src="/images/tarte_borned.png"
                       alt="フランス宮廷でのタルト"
-                      className="w-full h-48 object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>
@@ -246,11 +251,12 @@ export default function Home() {
               {/* いちごの魅力 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                    <Image
                       src="/images/fresh_strawberries.png"
                       alt="新鮮ないちご"
-                      className="w-full h-48 object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>
@@ -285,11 +291,12 @@ export default function Home() {
                   <span className="text-white font-bold">3</span>
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                    <Image
                       src="/images/french_patisserie_history.png"
                       alt="パティスリーの技法"
-                      className="w-full h-48 object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>
@@ -298,11 +305,12 @@ export default function Home() {
               {/* 現代のパティスリー */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                    <Image
                       src="/images/gototartetojapan.png"
                       alt="現代のパティスリー"
-                      className="w-full h-48 object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>
@@ -337,11 +345,12 @@ export default function Home() {
                   <Star size={20} className="text-white" fill="currentColor" />
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <img
+                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                    <Image
                       src="/images/tartefraises.jpg"
                       alt="現代のタルトフレーズ"
-                      className="w-full h-48 object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>
