@@ -11,7 +11,7 @@ export default function Home() {
       id: 1,
       title: "ア・ラ・カンパーニュ：サクサクタルト生地の裏技",
       excerpt:
-        "神戸発祥の人気パティスリー「ア・ラ・カンパーニュ」。時間が経ってもべちゃっとしない、プロが教える「空焼き」のひと手間をご紹介。",
+        "神戸発祥の人気パティスリー。フランスの田舎をイメージした温かみのある空間で、季節のフルーツを使ったタルトが人気。",
       image: "/images/a_la_campagne2_1.JPG",
       category: "Recipe",
       date: "2026.01.12",
@@ -21,7 +21,7 @@ export default function Home() {
       id: 2,
       title: "デリス タルト＆カフェ：季節限定いちごタルト",
       excerpt:
-        "人気カフェ「デリス タルト＆カフェ」。サクサクのタルト生地と濃厚なカスタードの相性が抜群の絶品タルトをご紹介。",
+        "タルト専門の人気カフェ。季節ごとに変わるフルーツタルトが楽しめる、居心地の良い空間。",
       image: "/images/delices_tarte_cafe1_1.JPG",
       category: "Cafe",
       date: "2024.09.14",
@@ -31,7 +31,7 @@ export default function Home() {
       id: 3,
       title: "トルタイシオ：隠れた名店のタルト",
       excerpt:
-        "地元で愛される「トルタイシオ」のいちごタルト。丁寧に作られた一品の魅力をお届けします。",
+        "地元で愛される隠れ家的なパティスリー。丁寧に作られたタルトが人気のお店。",
       image: "/images/torutaishio1_1.JPG",
       category: "Review",
       date: "2024.02.10",
@@ -41,7 +41,7 @@ export default function Home() {
       id: 4,
       title: "キル フェ ボン：季節のフルーツタルト",
       excerpt:
-        "静岡発のタルト専門店「キル フェ ボン」。新鮮な果物をふんだんに使った、まるでアート作品のようなタルトをご紹介。",
+        "静岡発のタルト専門店。新鮮な果物をふんだんに使った、まるでアート作品のような美しいタルトが人気。",
       image: "/images/quil_fait_bon1_1.JPG",
       category: "Cafe",
       date: "2024.02.05",
@@ -51,7 +51,7 @@ export default function Home() {
       id: 5,
       title: "パティスリー トゥーストゥース：洗練されたタルト",
       excerpt:
-        "神戸を代表するパティスリー「TOOTH TOOTH」。洗練されたデザインと本格的な味わいのタルトをご紹介。",
+        "神戸を代表するパティスリー。洗練されたデザインと本格的な味わいのタルトが人気。",
       image: "/images/patisserie_tooth_tooth1_1.JPG",
       category: "Review",
       date: "2023.12.16",
@@ -61,7 +61,7 @@ export default function Home() {
       id: 6,
       title: "ア・ラ・カンパーニュ：宝石のようないちごタルト",
       excerpt:
-        "神戸発祥の人気パティスリー「ア・ラ・カンパーニュ」。フレッシュないちごがたっぷり乗った美しいタルトの魅力をお伝えします。",
+        "神戸発祥の人気パティスリー。フランスの田舎をイメージした温かみのある空間で、季節のフルーツを使ったタルトが人気。",
       image: "/images/a_la_campagne1_1.JPG",
       category: "Review",
       date: "2023.11.02",
@@ -122,8 +122,8 @@ export default function Home() {
             <div className="mb-16 bg-white rounded-3xl p-8 shadow-xl shadow-rose-100/50 flex flex-col md:flex-row items-center gap-8 border border-rose-50">
               <div className="w-full md:w-1/2 h-64 md:h-80 relative overflow-hidden rounded-2xl group">
                 <img
-                  src="/images/quil_fait_bon1_2.JPG"
-                  alt="Featured Tart"
+                  src="/images/a_la_campagne2_1.JPG"
+                  alt="ア・ラ・カンパーニュのタルト"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-rose-500 uppercase tracking-wider">
@@ -132,11 +132,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2 text-left">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  キル フェ ボン：究極のいちごタルト
+                  ア・ラ・カンパーニュ：サクサクタルト生地の裏技
                 </h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  静岡発のタルト専門店「キル フェ
-                  ボン」。今週末は、少し手間をかけて特別なタルトを作りませんか？アーモンドクリームの香ばしさと、フレッシュないちごの酸味が織りなすハーモニーをお届けします。
+                  神戸発祥の人気パティスリー。フランスの田舎をイメージした温かみのある空間で、季節のフルーツを使ったタルトが人気。
                 </p>
               </div>
             </div>
