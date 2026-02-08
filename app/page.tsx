@@ -2,15 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Cake, Coffee, Star, X } from "lucide-react";
-
-type Post = {
-  id: number;
-  title: string;
-  excerpt: string;
-  image: string;
-  date: string;
-};
+import { Cake, Coffee, Star } from "lucide-react";
+import { Post, PostCard, PostModal } from "./components";
 
 function tabClassName(isActive: boolean): string {
   return `px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
@@ -144,32 +137,11 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <article
+                <PostCard
                   key={post.id}
+                  post={post}
                   onClick={() => setSelectedPost(post)}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-rose-100/50 hover:shadow-2xl hover:shadow-rose-200/50 transition-all duration-300 transform hover:-translate-y-2 border border-rose-50 flex flex-col h-full cursor-pointer"
-                >
-                  <div className="relative h-56 overflow-hidden">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="text-sm text-gray-400 mb-2 font-medium">
-                      {post.date}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-rose-500 transition-colors leading-tight">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                </article>
+                />
               ))}
             </div>
           </>
@@ -351,49 +323,7 @@ export default function Home() {
 
       {/* Post Detail Modal */}
       {selectedPost && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop"
-          onClick={() => setSelectedPost(null)}
-        >
-          <div
-            className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header with Close Button */}
-            <div className="relative">
-              <div className="relative h-64 md:h-80 overflow-hidden">
-                <Image
-                  src={selectedPost.image}
-                  alt={selectedPost.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
-              <button
-                onClick={() => setSelectedPost(null)}
-                className="absolute top-4 right-4 bg-white/90 backdrop-blur hover:bg-white rounded-full p-2 transition-colors shadow-lg"
-              >
-                <X size={24} className="text-gray-700" />
-              </button>
-              <div className="absolute bottom-4 left-6 right-6 text-white">
-                <div className="text-sm font-medium opacity-90 mb-2">
-                  {selectedPost.date}
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-20rem)]">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 leading-tight">
-                {selectedPost.title}
-              </h2>
-              <p className="text-gray-600 leading-relaxed text-base">
-                {selectedPost.excerpt}
-              </p>
-            </div>
-          </div>
-        </div>
+        <PostModal post={selectedPost} onClose={() => setSelectedPost(null)} />
       )}
 
       {/* Footer */}
