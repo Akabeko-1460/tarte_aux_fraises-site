@@ -2,15 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Cake, Coffee, Star, X } from "lucide-react";
-
-type Post = {
-  id: number;
-  title: string;
-  excerpt: string;
-  image: string;
-  date: string;
-};
+import { Star } from "lucide-react";
+import { Post, PostCard, PostModal } from "./components";
 
 function tabClassName(isActive: boolean): string {
   return `px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
@@ -76,18 +69,36 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      {/* Floating Background Decorations */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <span className="absolute top-[20%] right-[10%] text-3xl opacity-10 animate-gentle-bounce">
+          🍓
+        </span>
+        <span className="absolute top-[40%] left-[8%] text-2xl opacity-10 animate-gentle-bounce-slow">
+          ✨
+        </span>
+        <span className="absolute bottom-[30%] right-[15%] text-2xl opacity-10 animate-gentle-bounce">
+          🎀
+        </span>
+        <span className="absolute top-[60%] left-[12%] text-3xl opacity-10 animate-gentle-bounce-slow">
+          🍰
+        </span>
+        <span className="absolute bottom-[20%] left-[20%] text-2xl opacity-10 animate-gentle-bounce">
+          💕
+        </span>
+        <span className="absolute top-[15%] left-[30%] text-2xl opacity-10 animate-gentle-bounce-slow">
+          🍓
+        </span>
+        <span className="absolute bottom-[40%] right-[25%] text-2xl opacity-10 animate-gentle-bounce">
+          🌸
+        </span>
+      </div>
+
       {/* Hero Section */}
-      <div className="pb-12 bg-gradient-to-b from-rose-50 to-white">
+      <div className="pb-12 bg-gradient-to-b from-rose-50 to-white relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
           <div className="text-center relative">
-            <div className="absolute top-0 left-1/4 animate-gentle-bounce opacity-20 hidden md:block">
-              <Cake size={48} className="text-rose-300" />
-            </div>
-            <div className="absolute bottom-0 right-1/4 animate-gentle-bounce-slow opacity-20 hidden md:block">
-              <Coffee size={48} className="text-amber-300" />
-            </div>
-
             <h1 className="font-script text-5xl md:text-7xl text-rose-500 mb-12 drop-shadow-sm">
               StrawberryLife
             </h1>
@@ -144,32 +155,11 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <article
+                <PostCard
                   key={post.id}
+                  post={post}
                   onClick={() => setSelectedPost(post)}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-rose-100/50 hover:shadow-2xl hover:shadow-rose-200/50 transition-all duration-300 transform hover:-translate-y-2 border border-rose-50 flex flex-col h-full cursor-pointer"
-                >
-                  <div className="relative h-56 overflow-hidden">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="text-sm text-gray-400 mb-2 font-medium">
-                      {post.date}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-rose-500 transition-colors leading-tight">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                </article>
+                />
               ))}
             </div>
           </>
@@ -209,7 +199,7 @@ export default function Home() {
               <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-rose-200 via-rose-300 to-rose-200 hidden md:block"></div>
 
               {/* 1. いちごとフランスの出会い */}
-              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
+              <div className="mb-12 md:mb-16 flex flex-col-reverse md:flex-row items-stretch gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 flex">
                   <div className="bg-rose-50 rounded-2xl p-6 w-full">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">
@@ -225,8 +215,8 @@ export default function Home() {
                 <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
                   <span className="text-white font-bold">1</span>
                 </div>
-                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                <div className="w-full md:w-1/2 md:pl-12">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_sailing_ship.jpg"
                       alt="フレジエの航海"
@@ -239,8 +229,8 @@ export default function Home() {
 
               {/* 2. フランス菓子の技法の確立 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
-                <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                <div className="w-full md:w-1/2 md:pr-12">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_pastry_display.jpg"
                       alt="パティスリーのショーケース"
@@ -265,7 +255,7 @@ export default function Home() {
               </div>
 
               {/* 3. いちごタルトの完成 */}
-              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
+              <div className="mb-12 md:mb-16 flex flex-col-reverse md:flex-row items-stretch gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 flex">
                   <div className="bg-rose-50 rounded-2xl p-6 w-full">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">
@@ -279,8 +269,8 @@ export default function Home() {
                 <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
                   <span className="text-white font-bold">3</span>
                 </div>
-                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                <div className="w-full md:w-1/2 md:pl-12">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/publicdomain-freetarte.jpg"
                       alt="いちごタルト"
@@ -293,8 +283,8 @@ export default function Home() {
 
               {/* 4. 素材の魅力と美しさへのこだわり */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
-                <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                <div className="w-full md:w-1/2 md:pr-12">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_fresh_strawberries.jpg"
                       alt="新鮮ないちご"
@@ -319,7 +309,7 @@ export default function Home() {
               </div>
 
               {/* 5. 現代への継承と進化 */}
-              <div className="flex flex-col md:flex-row items-stretch gap-8">
+              <div className="flex flex-col-reverse md:flex-row items-stretch gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 flex">
                   <div className="bg-gradient-to-br from-rose-100 to-rose-50 rounded-2xl p-6 w-full border-2 border-rose-200">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">
@@ -333,8 +323,8 @@ export default function Home() {
                 <div className="hidden md:flex w-12 h-12 bg-gradient-to-r from-rose-400 to-rose-500 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
                   <Star size={20} className="text-white" fill="currentColor" />
                 </div>
-                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                <div className="w-full md:w-1/2 md:pl-12">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_modern_dessert.jpg"
                       alt="現代のデザート"
@@ -351,49 +341,7 @@ export default function Home() {
 
       {/* Post Detail Modal */}
       {selectedPost && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop"
-          onClick={() => setSelectedPost(null)}
-        >
-          <div
-            className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header with Close Button */}
-            <div className="relative">
-              <div className="relative h-64 md:h-80 overflow-hidden">
-                <Image
-                  src={selectedPost.image}
-                  alt={selectedPost.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
-              <button
-                onClick={() => setSelectedPost(null)}
-                className="absolute top-4 right-4 bg-white/90 backdrop-blur hover:bg-white rounded-full p-2 transition-colors shadow-lg"
-              >
-                <X size={24} className="text-gray-700" />
-              </button>
-              <div className="absolute bottom-4 left-6 right-6 text-white">
-                <div className="text-sm font-medium opacity-90 mb-2">
-                  {selectedPost.date}
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-20rem)]">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 leading-tight">
-                {selectedPost.title}
-              </h2>
-              <p className="text-gray-600 leading-relaxed text-base">
-                {selectedPost.excerpt}
-              </p>
-            </div>
-          </div>
-        </div>
+        <PostModal post={selectedPost} onClose={() => setSelectedPost(null)} />
       )}
 
       {/* Footer */}

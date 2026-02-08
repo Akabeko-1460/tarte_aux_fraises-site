@@ -10,6 +10,50 @@ body {
   font-family: "M PLUS Rounded 1c", sans-serif;
   background: var(--background);
   color: var(--foreground);
+  position: relative;
+}
+
+/* Cute floating decorations */
+body::before {
+  content: "🍓";
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  font-size: 2rem;
+  opacity: 0.15;
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::after {
+  content: "🍰";
+  position: fixed;
+  bottom: 15%;
+  right: 8%;
+  font-size: 2rem;
+  opacity: 0.15;
+  animation: float 8s ease-in-out infinite reverse;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Additional decorative elements */
+.bg-decoration {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
 }
 
 .font-script {
