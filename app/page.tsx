@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Cake, Coffee, Star } from "lucide-react";
+import { Cake, Coffee, Star, X } from "lucide-react";
 
-function tabClassName(
-  isActive: boolean
-): string {
+type Post = {
+  id: number;
+  title: string;
+  excerpt: string;
+  image: string;
+  date: string;
+};
+
+function tabClassName(isActive: boolean): string {
   return `px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
     isActive
       ? "bg-gradient-to-r from-rose-400 to-rose-500 border-rose-400 text-white shadow-rose-200"
@@ -17,7 +23,8 @@ function tabClassName(
 export default function Home() {
   // 状態管理
   const [activeTab, setActiveTab] = useState<"AllPosts" | "About">("AllPosts");
-  const posts = [
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const posts: Post[] = [
     {
       id: 1,
       title: "ア・ラ・カンパーニュ：南仏薫るいちごのタルト",
@@ -139,7 +146,8 @@ export default function Home() {
               {posts.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-rose-100/50 hover:shadow-2xl hover:shadow-rose-200/50 transition-all duration-300 transform hover:-translate-y-2 border border-rose-50 flex flex-col h-full"
+                  onClick={() => setSelectedPost(post)}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-rose-100/50 hover:shadow-2xl hover:shadow-rose-200/50 transition-all duration-300 transform hover:-translate-y-2 border border-rose-50 flex flex-col h-full cursor-pointer"
                 >
                   <div className="relative h-56 overflow-hidden">
                     <Image
@@ -155,7 +163,7 @@ export default function Home() {
                       {post.date}
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-rose-500 transition-colors leading-tight">
-                      <a href="#">{post.title}</a>
+                      {post.title}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
                       {post.excerpt}
@@ -166,20 +174,22 @@ export default function Home() {
             </div>
           </>
         ) : (
-          /* About Section - タルトフレーズの歴史 */
+          /* About Section - いちごタルトの魅力を探る：歴史と発祥 */
           <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl shadow-rose-100/50 border border-rose-50">
             <div className="text-center mb-12">
               <h2 className="font-script text-4xl md:text-5xl text-rose-500 mb-4">
                 Tarte aux Fraises
               </h2>
-              <p className="text-gray-600 text-lg">いちごタルトの歴史</p>
+              <p className="text-gray-600 text-lg">
+                いちごタルトの魅力を探る：歴史と発祥
+              </p>
             </div>
 
             {/* メインビジュアル */}
             <div className="mb-16 relative overflow-hidden rounded-3xl shadow-2xl shadow-rose-200/50 h-64 md:h-96">
               <Image
-                src="/images/strawberry_tart_vintage.png"
-                alt="Tarte aux Fraises - Paris"
+                src="/images/unsplash-freetarte.jpg"
+                alt="Tarte aux Fraises"
                 fill
                 className="object-cover"
               />
@@ -188,7 +198,9 @@ export default function Home() {
                 <p className="font-script text-3xl md:text-4xl drop-shadow-lg">
                   La douceur de la vie
                 </p>
-                <p className="text-rose-100 mt-2">人生の甘美なひととき</p>
+                <p className="text-rose-100 mt-2">
+                  フランス発祥の美しいお菓子、その歴史をたどる
+                </p>
               </div>
             </div>
 
@@ -196,26 +208,28 @@ export default function Home() {
             <div className="relative">
               <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-rose-200 via-rose-300 to-rose-200 hidden md:block"></div>
 
-              {/* 起源 */}
-              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:pr-12">
-                  <div className="bg-rose-50 rounded-2xl p-6 inline-block">
+              {/* 1. いちごとフランスの出会い */}
+              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
+                <div className="w-full md:w-1/2 md:pr-12 flex">
+                  <div className="bg-rose-50 rounded-2xl p-6 w-full">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">
-                      フランス宮廷での誕生
+                      いちごとフランスの出会い
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      いちごとフランスの深い縁は、1714年にフランス海軍士官フレジエが南米からチリイチゴを持ち帰ったことに始まります。この品種がヨーロッパ在来種と交配し、現在の大粒いちご（Fragaria × ananassa）が誕生しました。1764年には植物学者デュシェーヌがルイ15世にいちごの研究を献上し、フランス宮廷でもいちごへの関心が高まっていきました。
+                      1714年、フランス軍士官フレジエが南米チリから大粒のチリイチゴを5株持ち帰りました。この品種がヨーロッパ在来種と交配し、現在の栽培いちご（Fragaria
+                      ×
+                      ananassa）が誕生。それまで小さな野いちごしか知らなかったフランスに、タルトを飾れる大粒いちごが登場したのです。
                     </p>
                   </div>
                 </div>
-                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg">
+                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
                   <span className="text-white font-bold">1</span>
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
                     <Image
-                      src="/images/tarte_borned.png"
-                      alt="フランス宮廷でのタルト"
+                      src="/images/about_sailing_ship.jpg"
+                      alt="フレジエの航海"
                       fill
                       className="object-cover"
                     />
@@ -223,107 +237,107 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* いちごの魅力 */}
-              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
+              {/* 2. フランス菓子の技法の確立 */}
+              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
                     <Image
-                      src="/images/fresh_strawberries.png"
+                      src="/images/about_pastry_display.jpg"
+                      alt="パティスリーのショーケース"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
+                  <span className="text-white font-bold">2</span>
+                </div>
+                <div className="w-full md:w-1/2 md:pl-12 flex">
+                  <div className="bg-rose-50 rounded-2xl p-6 w-full">
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      フランス菓子の技法の確立
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      17世紀末、料理人マシアロがカスタードクリームの原型を記録。19世紀にはカレームが菓子を芸術に高め、エスコフィエがパティシエを専門職として確立しました。この流れの中でパート・シュクレ（甘いタルト生地）も洗練されていきます。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. いちごタルトの完成 */}
+              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
+                <div className="w-full md:w-1/2 md:pr-12 flex">
+                  <div className="bg-rose-50 rounded-2xl p-6 w-full">
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      いちごタルトの完成
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      パート・シュクレにカスタードを敷き、いちごを並べる古典的スタイルが確立したのは19世紀後半。大粒いちごの品種改良、菓子技法の成熟、パティスリー文化の広がり――これらが揃い、いちごタルトは春のショーケースを飾る代表的なデザートになりました。
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
+                  <span className="text-white font-bold">3</span>
+                </div>
+                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                    <Image
+                      src="/images/publicdomain-freetarte.jpg"
+                      alt="いちごタルト"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. 素材の魅力と美しさへのこだわり */}
+              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
+                <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
+                    <Image
+                      src="/images/about_fresh_strawberries.jpg"
                       alt="新鮮ないちご"
                       fill
                       className="object-cover"
                     />
                   </div>
                 </div>
-                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg">
-                  <span className="text-white font-bold">2</span>
-                </div>
-                <div className="w-full md:w-1/2 md:pl-12">
-                  <div className="bg-rose-50 rounded-2xl p-6 inline-block">
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">
-                      いちごの魅力
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      フランスでは4月から7月にかけていちごの旬を迎えます。細長い形と甘酸っぱさが特徴のガリゲット、野いちごのような濃い香りを持つマラ・デ・ボワなど、個性豊かな品種が各地で栽培されています。ペリゴール地方のいちごはEUの地理的表示保護を受けた特産品です。
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* タルトの特徴 */}
-              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:pr-12">
-                  <div className="bg-rose-50 rounded-2xl p-6 inline-block">
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">
-                      素材が織りなすハーモニー
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      いちごタルトの土台は、バターと砂糖を練り込んだパート・シュクレ。口の中でほろりと崩れるクッキーのような生地です。その上にアーモンドクリームを薄く敷いて焼くことで、風味が加わると同時にクリームの水分から生地を守ります。仕上げのクレーム・パティシエールは卵黄とバニラで炊き上げた濃厚なカスタード。19世紀のパティシエ、アントナン・カレームによって体系化された技法が、今も受け継がれています。
-                    </p>
-                  </div>
-                </div>
-                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg">
-                  <span className="text-white font-bold">3</span>
-                </div>
-                <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
-                    <Image
-                      src="/images/french_patisserie_history.png"
-                      alt="パティスリーの技法"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* 現代のパティスリー */}
-              <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
-                    <Image
-                      src="/images/gototartetojapan.png"
-                      alt="現代のパティスリー"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg">
+                <div className="hidden md:flex w-12 h-12 bg-rose-400 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
                   <span className="text-white font-bold">4</span>
                 </div>
-                <div className="w-full md:w-1/2 md:pl-12">
-                  <div className="bg-rose-50 rounded-2xl p-6 inline-block">
+                <div className="w-full md:w-1/2 md:pl-12 flex">
+                  <div className="bg-rose-50 rounded-2xl p-6 w-full">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">
-                      美しさへのこだわり
+                      素材の魅力と美しさへのこだわり
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      いちごタルトの仕上げに欠かせないのが、ナパージュと呼ばれる艶出しです。伝統的にはアプリコットジャムを裏漉しして温めたものを刷毛で薄く塗り、果実に宝石のような輝きを与えます。赤い果実には赤スグリのジュレが使われることも。この一手間が、パティスリーのショーケースを華やかに彩る決め手になっています。
+                      フランスのいちごは4〜7月が旬。甘酸っぱいガリゲットや野いちごの香りを持つマラ・デ・ボワなど、品種ごとの個性がタルトの味を左右します。仕上げのナパージュ（艶出し）が果実に宝石のような輝きを与え、ショーケースを華やかに彩ります。
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* 愛され続けるスイーツ */}
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:pr-12">
-                  <div className="bg-gradient-to-br from-rose-100 to-rose-50 rounded-2xl p-6 inline-block border-2 border-rose-200">
+              {/* 5. 現代への継承と進化 */}
+              <div className="flex flex-col md:flex-row items-stretch gap-8">
+                <div className="w-full md:w-1/2 md:pr-12 flex">
+                  <div className="bg-gradient-to-br from-rose-100 to-rose-50 rounded-2xl p-6 w-full border-2 border-rose-200">
                     <h3 className="text-xl font-bold text-gray-800 mb-3">
-                      歴史と文化を語る一品
+                      現代への継承と進化
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      19世紀にカレームやエスコフィエといった巨匠たちが体系化したフランス菓子の技法は、現代のパティシエたちに受け継がれ、ピエール・エルメやセドリック・グロレらによって進化を続けています。いちごタルトはそのシンプルさゆえに、素材の質と職人の技量がそのまま味に表れる一品。毎年春が来るたびにパティスリーのショーケースを彩り、フランスの食文化の豊かさを私たちに伝えてくれます。
+                      「お菓子界のピカソ」ピエール・エルメの大胆な味の組み合わせや、セドリック・グロレの本物そっくりなトロンプ・ルイユ――古典の技法は現代のパティシエたちによって進化を続けています。シンプルだからこそ素材と技量がそのまま味に表れる一品です。
                     </p>
                   </div>
                 </div>
-                <div className="hidden md:flex w-12 h-12 bg-gradient-to-r from-rose-400 to-rose-500 rounded-full items-center justify-center z-10 shadow-lg">
+                <div className="hidden md:flex w-12 h-12 bg-gradient-to-r from-rose-400 to-rose-500 rounded-full items-center justify-center z-10 shadow-lg shrink-0 self-center">
                   <Star size={20} className="text-white" fill="currentColor" />
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12 hidden md:block">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 relative h-48">
+                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-full min-h-[12rem]">
                     <Image
-                      src="/images/tartefraises.jpg"
-                      alt="現代のタルトフレーズ"
+                      src="/images/about_modern_dessert.jpg"
+                      alt="現代のデザート"
                       fill
                       className="object-cover"
                     />
@@ -334,6 +348,53 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* Post Detail Modal */}
+      {selectedPost && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-modal-backdrop"
+          onClick={() => setSelectedPost(null)}
+        >
+          <div
+            className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header with Close Button */}
+            <div className="relative">
+              <div className="relative h-64 md:h-80 overflow-hidden">
+                <Image
+                  src={selectedPost.image}
+                  alt={selectedPost.title}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="absolute top-4 right-4 bg-white/90 backdrop-blur hover:bg-white rounded-full p-2 transition-colors shadow-lg"
+              >
+                <X size={24} className="text-gray-700" />
+              </button>
+              <div className="absolute bottom-4 left-6 right-6 text-white">
+                <div className="text-sm font-medium opacity-90 mb-2">
+                  {selectedPost.date}
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-20rem)]">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 leading-tight">
+                {selectedPost.title}
+              </h2>
+              <p className="text-gray-600 leading-relaxed text-base">
+                {selectedPost.excerpt}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-white border-t border-rose-100 pt-12 pb-8">
