@@ -4,6 +4,16 @@ import { useState } from "react";
 import Image from "next/image";
 import { Cake, Coffee, Star } from "lucide-react";
 
+function tabClassName(
+  isActive: boolean
+): string {
+  return `px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
+    isActive
+      ? "bg-gradient-to-r from-rose-400 to-rose-500 border-rose-400 text-white shadow-rose-200"
+      : "bg-white border-rose-200 text-rose-400 hover:bg-rose-50 hover:border-rose-300 hover:shadow-lg"
+  }`;
+}
+
 export default function Home() {
   // 状態管理
   const [activeTab, setActiveTab] = useState<"AllPosts" | "About">("AllPosts");
@@ -14,9 +24,7 @@ export default function Home() {
       excerpt:
         "バターが香るサクサクの生地に、手炊きで仕立てたなめらかなカスタードクリーム。その上にどっさり盛られた完熟いちごの甘酸っぱさが口いっぱいに広がります。南仏の田舎をイメージしたお店の雰囲気も心地よく、つい長居してしまいました。",
       image: "/images/a_la_campagne2_1.JPG",
-      category: "Recipe",
       date: "2026.01.12",
-      likes: 178,
     },
     {
       id: 2,
@@ -24,9 +32,7 @@ export default function Home() {
       excerpt:
         "北海道産小麦粉『雪星』と発酵バターで焼き上げた生地は、口に入れた瞬間ほろりと溶ける繊細さ。その上にたっぷり盛られた完熟いちごは甘みが濃く、カスタードとの相性も抜群でした。",
       image: "/images/delices_tarte_cafe1_1.JPG",
-      category: "Cafe",
       date: "2024.09.14",
-      likes: 210,
     },
     {
       id: 3,
@@ -34,9 +40,7 @@ export default function Home() {
       excerpt:
         "グラスフェッドバターを100%使用した生地は、風味が濃厚でコクのある味わい。ぎっしり並んだ大粒いちごは宝石箱のように美しく、甘いカスタードとの組み合わせが絶妙です。手頃な価格で本格的なタルトが楽しめるのも嬉しいポイント。",
       image: "/images/torutaishio1_1.JPG",
-      category: "Review",
       date: "2024.02.10",
-      likes: 95,
     },
     {
       id: 4,
@@ -44,9 +48,7 @@ export default function Home() {
       excerpt:
         "あまおうや紅ほっぺなど厳選された品種のいちごが、タルトの上にぎゅっと立てて並べられた姿は圧巻。しっかり焼き込まれた厚めの生地と、ふわっと軽いディプロマットクリームが果実の甘さを引き立てます。まさに\u201C食べるアート\u201Dでした。",
       image: "/images/quil_fait_bon1_1.JPG",
-      category: "Cafe",
       date: "2024.02.05",
-      likes: 89,
     },
     {
       id: 5,
@@ -54,9 +56,7 @@ export default function Home() {
       excerpt:
         "薄く繊細に焼き上げた生地の中にはアーモンドクリームの層が隠れていて、バニラが豊かに香るカスタードとの重なりに奥行きを感じます。いちごの配置も端正で、艶やかなナパージュが宝石のような輝きを添えていました。さすが神戸の正統派パティスリーです。",
       image: "/images/patisserie_tooth_tooth1_1.JPG",
-      category: "Review",
       date: "2023.12.16",
-      likes: 156,
     },
     {
       id: 6,
@@ -64,17 +64,12 @@ export default function Home() {
       excerpt:
         "いちごムースとホワイトチョコを合わせたクリームがどこを食べてもいちごミルクのような味わい。中にはフレッシュいちごが忍ばせてあり、食感のアクセントになっています。見た目もかわいらしく、贈り物にもぴったりの一品です。",
       image: "/images/a_la_campagne1_1.JPG",
-      category: "Review",
       date: "2023.11.02",
-      likes: 124,
     },
   ];
 
-  // 全投稿を表示
-  const filteredPosts = posts;
-
   return (
-    <div className="min-h-screen bg-[#FFF5F5] text-[#4A4A4A]">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <div className="pb-12 bg-gradient-to-b from-rose-50 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
@@ -91,21 +86,13 @@ export default function Home() {
             </h1>
             <div className="flex justify-center gap-4">
               <button
-                className={`px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
-                  activeTab === "AllPosts"
-                    ? "bg-gradient-to-r from-rose-400 to-rose-500 border-rose-400 text-white shadow-rose-200"
-                    : "bg-white border-rose-200 text-rose-400 hover:bg-rose-50 hover:border-rose-300 hover:shadow-lg"
-                }`}
+                className={tabClassName(activeTab === "AllPosts")}
                 onClick={() => setActiveTab("AllPosts")}
               >
                 All Posts
               </button>
               <button
-                className={`px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
-                  activeTab === "About"
-                    ? "bg-gradient-to-r from-rose-400 to-rose-500 border-rose-400 text-white shadow-rose-200"
-                    : "bg-white border-rose-200 text-rose-400 hover:bg-rose-50 hover:border-rose-300 hover:shadow-lg"
-                }`}
+                className={tabClassName(activeTab === "About")}
                 onClick={() => setActiveTab("About")}
               >
                 About
@@ -123,8 +110,8 @@ export default function Home() {
             <div className="mb-16 bg-white rounded-3xl p-8 shadow-xl shadow-rose-100/50 flex flex-col md:flex-row items-center gap-8 border border-rose-50">
               <div className="w-full md:w-1/2 h-64 md:h-80 relative overflow-hidden rounded-2xl group">
                 <Image
-                  src="/images/a_la_campagne2_1.JPG"
-                  alt="ア・ラ・カンパーニュのタルト"
+                  src={posts[0].image}
+                  alt={posts[0].title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -134,10 +121,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2 text-left">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  ア・ラ・カンパーニュ：南仏薫るいちごのタルト
+                  {posts[0].title}
                 </h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  バターが香るサクサクの生地に、手炊きで仕立てたなめらかなカスタードクリーム。その上にどっさり盛られた完熟いちごの甘酸っぱさが口いっぱいに広がります。南仏の田舎をイメージしたお店の雰囲気も心地よく、つい長居してしまいました。
+                  {posts[0].excerpt}
                 </p>
               </div>
             </div>
@@ -149,7 +136,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
+              {posts.map((post) => (
                 <article
                   key={post.id}
                   className="bg-white rounded-2xl overflow-hidden shadow-lg shadow-rose-100/50 hover:shadow-2xl hover:shadow-rose-200/50 transition-all duration-300 transform hover:-translate-y-2 border border-rose-50 flex flex-col h-full"
@@ -177,18 +164,6 @@ export default function Home() {
                 </article>
               ))}
             </div>
-
-            {/* Empty State */}
-            {filteredPosts.length === 0 && (
-              <div className="text-center py-20 bg-white rounded-2xl shadow-sm border border-dashed border-rose-200">
-                <Cake size={48} className="mx-auto text-rose-200 mb-4" />
-                <p className="text-gray-500">
-                  記事が見つかりませんでした。
-                  <br />
-                  他のカテゴリを試してみてください。
-                </p>
-              </div>
-            )}
           </>
         ) : (
           /* About Section - タルトフレーズの歴史 */
