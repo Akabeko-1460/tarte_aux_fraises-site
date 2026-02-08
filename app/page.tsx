@@ -1,97 +1,76 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Heart,
-  Instagram,
-  Twitter,
-  Mail,
-  ChevronRight,
-  Cake,
-  Coffee,
-  Star,
-} from "lucide-react";
+import { Cake, Coffee, Star } from "lucide-react";
 
 export default function Home() {
   // 状態管理
   const [activeTab, setActiveTab] = useState<"AllPosts" | "About">("AllPosts");
-  const [posts, setPosts] = useState([
+  const posts = [
     {
       id: 1,
-      title: "ア・ラ・カンパーニュ：宝石のようないちごタルト",
+      title: "ア・ラ・カンパーニュ：サクサクタルト生地の裏技",
       excerpt:
-        "神戸発祥の人気パティスリー「ア・ラ・カンパーニュ」。フレッシュないちごがたっぷり乗った美しいタルトの魅力をお伝えします。",
-      image: "/images/a_la_campagne1_1.JPG",
-      category: "Review",
-      date: "2024.03.15",
-      likes: 124,
+        "神戸発祥の人気パティスリー「ア・ラ・カンパーニュ」。時間が経ってもべちゃっとしない、プロが教える「空焼き」のひと手間をご紹介。",
+      image: "/images/a_la_campagne2_1.JPG",
+      category: "Recipe",
+      date: "2026.01.12",
+      likes: 178,
     },
     {
       id: 2,
-      title: "キル フェ ボン：季節のフルーツタルト",
+      title: "デリス タルト＆カフェ：季節限定いちごタルト",
       excerpt:
-        "静岡発のタルト専門店「キル フェ ボン」。新鮮な果物をふんだんに使った、まるでアート作品のようなタルトをご紹介。",
-      image: "/images/quil_fait_bon1_1.JPG",
-      category: "Cafe",
-      date: "2024.03.10",
-      likes: 89,
-    },
-    {
-      id: 3,
-      title: "デリス タルトカフェで見つけた絶品タルト",
-      excerpt:
-        "デリス タルト＆カフェの季節限定いちごタルト。サクサクのタルト生地と濃厚なカスタードの相性が抜群です。",
+        "人気カフェ「デリス タルト＆カフェ」。サクサクのタルト生地と濃厚なカスタードの相性が抜群の絶品タルトをご紹介。",
       image: "/images/delices_tarte_cafe1_1.JPG",
       category: "Cafe",
-      date: "2024.03.05",
+      date: "2024.09.14",
       likes: 210,
     },
     {
-      id: 4,
-      title: "パティスリー トゥーストゥースの魅力",
-      excerpt:
-        "神戸を代表するパティスリー「TOOTH TOOTH」。洗練されたデザインと本格的な味わいのタルトをレビュー。",
-      image: "/images/patisserie_tooth_tooth1_1.JPG",
-      category: "Review",
-      date: "2024.02.28",
-      likes: 156,
-    },
-    {
-      id: 5,
+      id: 3,
       title: "トルタイシオ：隠れた名店のタルト",
       excerpt:
         "地元で愛される「トルタイシオ」のいちごタルト。丁寧に作られた一品の魅力をお届けします。",
       image: "/images/torutaishio1_1.JPG",
       category: "Review",
-      date: "2024.02.20",
+      date: "2024.02.10",
       likes: 95,
     },
     {
-      id: 6,
-      title: "タルト生地をサクサクにする裏技",
+      id: 4,
+      title: "キル フェ ボン：季節のフルーツタルト",
       excerpt:
-        "時間が経ってもべちゃっとしない。プロが教える「空焼き」のひと手間について。",
-      image: "/images/a_la_campagne2_1.JPG",
-      category: "Recipe",
-      date: "2024.02.14",
-      likes: 178,
+        "静岡発のタルト専門店「キル フェ ボン」。新鮮な果物をふんだんに使った、まるでアート作品のようなタルトをご紹介。",
+      image: "/images/quil_fait_bon1_1.JPG",
+      category: "Cafe",
+      date: "2024.02.05",
+      likes: 89,
     },
-  ]);
+    {
+      id: 5,
+      title: "パティスリー トゥーストゥース：洗練されたタルト",
+      excerpt:
+        "神戸を代表するパティスリー「TOOTH TOOTH」。洗練されたデザインと本格的な味わいのタルトをご紹介。",
+      image: "/images/patisserie_tooth_tooth1_1.JPG",
+      category: "Review",
+      date: "2023.12.16",
+      likes: 156,
+    },
+    {
+      id: 6,
+      title: "ア・ラ・カンパーニュ：宝石のようないちごタルト",
+      excerpt:
+        "神戸発祥の人気パティスリー「ア・ラ・カンパーニュ」。フレッシュないちごがたっぷり乗った美しいタルトの魅力をお伝えします。",
+      image: "/images/a_la_campagne1_1.JPG",
+      category: "Review",
+      date: "2023.11.02",
+      likes: 124,
+    },
+  ];
 
   // 全投稿を表示
   const filteredPosts = posts;
-
-  // いいね機能
-  const toggleLike = (id: number) => {
-    setPosts(
-      posts.map((post) => {
-        if (post.id === id) {
-          return { ...post, likes: post.likes + 1 };
-        }
-        return post;
-      }),
-    );
-  };
 
   return (
     <div className="min-h-screen bg-[#FFF5F5] text-[#4A4A4A]">
@@ -106,14 +85,9 @@ export default function Home() {
               <Coffee size={48} className="text-amber-300" />
             </div>
 
-            <h1 className="font-script text-5xl md:text-7xl text-rose-500 mb-6 drop-shadow-sm">
+            <h1 className="font-script text-5xl md:text-7xl text-rose-500 mb-12 drop-shadow-sm">
               StrawberryLife
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              甘酸っぱい毎日に、とびきりのご褒美を。
-              <br />
-              いちごタルトを愛するすべての人へ贈る、ライフスタイルブログ。
-            </p>
             <div className="flex justify-center gap-4">
               <button
                 className={`px-8 py-3 border-2 rounded-full text-sm font-bold shadow-md transition-all duration-300 ${
@@ -157,28 +131,13 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full md:w-1/2 text-left">
-                <div className="flex items-center space-x-2 text-amber-500 mb-2">
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                </div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  週末のご褒美：究極のいちごタルト作り
+                  キル フェ ボン：究極のいちごタルト
                 </h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  今週末は、少し手間をかけて特別なタルトを作りませんか？
-                  アーモンドクリームの香ばしさと、フレッシュないちごの酸味が織りなすハーモニー。
-                  初心者でも失敗しない、とっておきのレシピを公開しました。
+                  静岡発のタルト専門店「キル フェ
+                  ボン」。今週末は、少し手間をかけて特別なタルトを作りませんか？アーモンドクリームの香ばしさと、フレッシュないちごの酸味が織りなすハーモニーをお届けします。
                 </p>
-                <button className="flex items-center text-rose-500 font-bold hover:text-rose-600 transition-colors group">
-                  続きを読む{" "}
-                  <ChevronRight
-                    className="ml-1 group-hover:translate-x-1 transition-transform"
-                    size={20}
-                  />
-                </button>
               </div>
             </div>
 
@@ -200,9 +159,6 @@ export default function Home() {
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                    <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-rose-500">
-                      {post.category}
-                    </span>
                   </div>
 
                   <div className="p-6 flex flex-col flex-grow">
@@ -212,25 +168,9 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-gray-800 mb-3 hover:text-rose-500 transition-colors leading-tight">
                       <a href="#">{post.title}</a>
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
+                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
                       {post.excerpt}
                     </p>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
-                      <button className="text-sm font-medium text-rose-500 hover:text-rose-600">
-                        Read More
-                      </button>
-                      <button
-                        onClick={() => toggleLike(post.id)}
-                        className="flex items-center space-x-1 text-gray-400 hover:text-rose-500 transition-colors group"
-                      >
-                        <Heart
-                          size={18}
-                          className={`transition-transform duration-300 group-hover:scale-125 ${post.likes % 2 !== 0 ? "fill-rose-500 text-rose-500" : ""}`}
-                        />
-                        <span className="text-xs">{post.likes}</span>
-                      </button>
-                    </div>
                   </div>
                 </article>
               ))}
@@ -280,16 +220,13 @@ export default function Home() {
 
               {/* 起源 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:text-right md:pr-12">
+                <div className="w-full md:w-1/2 md:pr-12">
                   <div className="bg-rose-50 rounded-2xl p-6 inline-block">
-                    <span className="text-rose-400 font-bold text-sm">
-                      16世紀
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-3">
-                      フランスでの誕生
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      フランス宮廷での誕生
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      タルトの起源はフランスのルネサンス期に遡ります。当時の貴族たちは、パイ生地にフルーツやクリームを乗せた菓子を愛好していました。「Tarte」という言葉はラテン語の「torta（丸いパン）」に由来します。
+                      いちごタルトは18世紀のフランス宮廷で特に人気を博したとされます。貴族や上流階級の人々は、特別な日にこのタルトをふるまうことで、ゲストへのもてなしを表現していました。華やかな席を彩る重要な役割を果たし、社会的地位や文化的背景を反映したスイーツとして認識されるようになりました。
                     </p>
                   </div>
                 </div>
@@ -300,14 +237,14 @@ export default function Home() {
                   <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
                     <img
                       src="/images/tarte_borned.png"
-                      alt="タルトの誕生"
+                      alt="フランス宮廷でのタルト"
                       className="w-full h-48 object-cover"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* いちごの導入 */}
+              {/* いちごの魅力 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
                   <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
@@ -323,34 +260,25 @@ export default function Home() {
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
                   <div className="bg-rose-50 rounded-2xl p-6 inline-block">
-                    <span className="text-rose-400 font-bold text-sm">
-                      18世紀
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-3">
-                      いちごとの出会い
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      いちごの魅力
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      18世紀、フランスの植物学者アントワーヌ・ニコラ・デュシェーヌが現代のいちご（Fragaria
-                      ×
-                      ananassa）を交配・開発。この大粒で甘いいちごがタルトの主役となり、「Tarte
-                      aux Fraises（タルト・オ・フレーズ）」が誕生しました。
+                      フランスでは、いちごは春から夏にかけて旬を迎え、特別に栽培される品種も多く存在します。フレッシュないちごの鮮やかな赤色は視覚的にも楽しませ、甘酸っぱさが口の中に広がります。季節感を醸し出す代表的なデザートとして位置付けられています。
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* パティスリーの発展 */}
+              {/* タルトの特徴 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:text-right md:pr-12">
+                <div className="w-full md:w-1/2 md:pr-12">
                   <div className="bg-rose-50 rounded-2xl p-6 inline-block">
-                    <span className="text-rose-400 font-bold text-sm">
-                      19世紀
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-3">
-                      パティスリー文化の開花
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      素材が織りなすハーモニー
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      パリを中心にパティスリー（洋菓子店）が次々とオープン。カスタードクリーム（クレーム・パティシエール）を使ったタルトが主流となり、サクサクのタルト生地（パート・シュクレ）の技法も確立されました。
+                      いちごタルトは、サクサクとしたタルト生地（パート・シュクレ）、甘酸っぱい新鮮ないちご、そして香り豊かなカスタードクリーム（クレーム・パティシエール）で構成されています。バターの風味がしっかりと感じられる生地は、口の中でほろりと崩れる食感を楽しませてくれます。
                     </p>
                   </div>
                 </div>
@@ -361,20 +289,20 @@ export default function Home() {
                   <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
                     <img
                       src="/images/french_patisserie_history.png"
-                      alt="19世紀パリのパティスリー"
+                      alt="パティスリーの技法"
                       className="w-full h-48 object-cover"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* 日本への伝来 */}
+              {/* 現代のパティスリー */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-center gap-8">
                 <div className="w-full md:w-1/2 md:pr-12 hidden md:block">
                   <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
                     <img
                       src="/images/gototartetojapan.png"
-                      alt="日本へのタルト伝来"
+                      alt="現代のパティスリー"
                       className="w-full h-48 object-cover"
                     />
                   </div>
@@ -384,31 +312,25 @@ export default function Home() {
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
                   <div className="bg-rose-50 rounded-2xl p-6 inline-block">
-                    <span className="text-rose-400 font-bold text-sm">
-                      20世紀後半
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-3">
-                      日本での発展
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      美しさへのこだわり
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      1970年代以降、日本のパティシエたちがフランスで修行し、本格的なフランス菓子を日本に持ち帰りました。日本の高品質ないちご（あまおう、とちおとめなど）との融合により、独自の進化を遂げています。
+                      フランス料理のデザートは、見た目の美しさを重要視する傾向があり、いちごタルトも美しい色彩と飾りつけが施されます。表面に艶やかなジャムやゼリーをトッピングすることで、視覚的にも楽しめる芸術作品のような存在感を放っています。
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* 現代 */}
+              {/* 愛され続けるスイーツ */}
               <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/2 md:text-right md:pr-12">
+                <div className="w-full md:w-1/2 md:pr-12">
                   <div className="bg-gradient-to-br from-rose-100 to-rose-50 rounded-2xl p-6 inline-block border-2 border-rose-200">
-                    <span className="text-rose-500 font-bold text-sm">
-                      現代
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-3">
-                      愛され続けるスイーツ
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">
+                      歴史と文化を語る一品
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      今日、いちごタルトは世界中で愛されるスイーツとなりました。日本では季節を問わず楽しめる定番デザートとして、カフェやパティスリーで親しまれています。伝統を守りながらも、新しいアレンジが次々と生まれています。
+                      いちごタルトは単なるデザートではなく、フランスの文化や歴史を語る一品です。豊かな歴史とともに今もなお愛され続け、一口味わうことでそこに込められた背景やストーリーを感じ取ることができます。美しさと豊かな味わいを兼ね備えたいちごタルトは、これからも多くの人々を魅了し続けることでしょう。
                     </p>
                   </div>
                 </div>
@@ -426,147 +348,21 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            {/* 追加情報 */}
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-2xl p-6 text-center">
-                <Cake size={32} className="mx-auto text-amber-500 mb-3" />
-                <h4 className="font-bold text-gray-800 mb-2">タルト生地</h4>
-                <p className="text-sm text-gray-600">
-                  サクサクのパート・シュクレが美味しさの秘密
-                </p>
-              </div>
-              <div className="bg-gradient-to-br from-rose-50 to-rose-100/50 rounded-2xl p-6 text-center">
-                <Heart size={32} className="mx-auto text-rose-500 mb-3" />
-                <h4 className="font-bold text-gray-800 mb-2">カスタード</h4>
-                <p className="text-sm text-gray-600">
-                  なめらかなクレーム・パティシエール
-                </p>
-              </div>
-              <div className="bg-gradient-to-br from-red-50 to-red-100/50 rounded-2xl p-6 text-center">
-                <Star size={32} className="mx-auto text-red-500 mb-3" />
-                <h4 className="font-bold text-gray-800 mb-2">いちご</h4>
-                <p className="text-sm text-gray-600">
-                  フレッシュな甘酸っぱさが主役
-                </p>
-              </div>
-            </div>
           </div>
         )}
       </main>
 
-      {/* Newsletter Section */}
-      <section className="bg-rose-100 py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-rose-800 mb-4">Stay Sweet!</h2>
-          <p className="text-rose-700 mb-8">
-            最新のレシピやカフェ情報をニュースレターでお届けします。
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="px-6 py-3 rounded-full border-2 border-white focus:outline-none focus:border-rose-300 bg-white/80 w-full text-gray-700 placeholder-rose-300"
-            />
-            <button className="px-8 py-3 bg-rose-500 text-white font-bold rounded-full hover:bg-rose-600 transition-transform hover:scale-105 shadow-lg shadow-rose-200">
-              Join
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-white border-t border-rose-100 pt-12 pb-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div className="col-span-1 md:col-span-1">
-              <span className="font-script text-2xl text-rose-500 mb-4 block">
-                Strawberry Life
-              </span>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                いちごタルトのある幸せな日常を綴るブログ。
-                <br />
-                甘い香りに包まれた時間をお届けします。
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-gray-800 mb-4">Categories</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Recipes
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Cafe Reviews
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Merchandise
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Events
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-gray-800 mb-4">About</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-rose-500 transition-colors">
-                    Privacy Policy
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-gray-800 mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-400 hover:bg-rose-500 hover:text-white transition-all"
-                >
-                  <Instagram size={20} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-400 hover:bg-rose-500 hover:text-white transition-all"
-                >
-                  <Twitter size={20} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-400 hover:bg-rose-500 hover:text-white transition-all"
-                >
-                  <Mail size={20} />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-rose-50 pt-8 text-center">
-            <p className="text-sm text-gray-400">
-              &copy; 2024 Strawberry Tart Life. All rights reserved.
-            </p>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-4">
+          <span className="font-script text-2xl text-rose-500 mb-4 block">
+            Strawberry Life
+          </span>
+          <p className="text-sm text-gray-500 leading-relaxed">
+            いちごタルトのある幸せな日常を綴るブログ。
+            <br />
+            甘酸っぱい香りに包まれるようなひとときをお届けします。
+          </p>
         </div>
       </footer>
     </div>
