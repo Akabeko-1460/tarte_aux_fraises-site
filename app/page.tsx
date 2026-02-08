@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Cake, Coffee, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { Post, PostCard, PostModal } from "./components";
 
 function tabClassName(isActive: boolean): string {
@@ -69,18 +69,36 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      {/* Floating Background Decorations */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <span className="absolute top-[20%] right-[10%] text-3xl opacity-10 animate-gentle-bounce">
+          🍓
+        </span>
+        <span className="absolute top-[40%] left-[8%] text-2xl opacity-10 animate-gentle-bounce-slow">
+          ✨
+        </span>
+        <span className="absolute bottom-[30%] right-[15%] text-2xl opacity-10 animate-gentle-bounce">
+          🎀
+        </span>
+        <span className="absolute top-[60%] left-[12%] text-3xl opacity-10 animate-gentle-bounce-slow">
+          🍰
+        </span>
+        <span className="absolute bottom-[20%] left-[20%] text-2xl opacity-10 animate-gentle-bounce">
+          💕
+        </span>
+        <span className="absolute top-[15%] left-[30%] text-2xl opacity-10 animate-gentle-bounce-slow">
+          🍓
+        </span>
+        <span className="absolute bottom-[40%] right-[25%] text-2xl opacity-10 animate-gentle-bounce">
+          🌸
+        </span>
+      </div>
+
       {/* Hero Section */}
-      <div className="pb-12 bg-gradient-to-b from-rose-50 to-white">
+      <div className="pb-12 bg-gradient-to-b from-rose-50 to-white relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
           <div className="text-center relative">
-            <div className="absolute top-0 left-1/4 animate-gentle-bounce opacity-20 hidden md:block">
-              <Cake size={48} className="text-rose-300" />
-            </div>
-            <div className="absolute bottom-0 right-1/4 animate-gentle-bounce-slow opacity-20 hidden md:block">
-              <Coffee size={48} className="text-amber-300" />
-            </div>
-
             <h1 className="font-script text-5xl md:text-7xl text-rose-500 mb-12 drop-shadow-sm">
               StrawberryLife
             </h1>
