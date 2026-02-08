@@ -198,7 +198,7 @@ export default function Home() {
                   <span className="text-white font-bold">1</span>
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-48 md:h-full md:min-h-[12rem]">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_sailing_ship.jpg"
                       alt="フレジエの航海"
@@ -212,7 +212,7 @@ export default function Home() {
               {/* 2. フランス菓子の技法の確立 */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
                 <div className="w-full md:w-1/2 md:pr-12">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-48 md:h-full md:min-h-[12rem]">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_pastry_display.jpg"
                       alt="パティスリーのショーケース"
@@ -252,7 +252,7 @@ export default function Home() {
                   <span className="text-white font-bold">3</span>
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-48 md:h-full md:min-h-[12rem]">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/publicdomain-freetarte.jpg"
                       alt="いちごタルト"
@@ -266,7 +266,7 @@ export default function Home() {
               {/* 4. 素材の魅力と美しさへのこだわり */}
               <div className="mb-12 md:mb-16 flex flex-col md:flex-row items-stretch gap-8">
                 <div className="w-full md:w-1/2 md:pr-12">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-48 md:h-full md:min-h-[12rem]">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_fresh_strawberries.jpg"
                       alt="新鮮ないちご"
@@ -306,7 +306,7 @@ export default function Home() {
                   <Star size={20} className="text-white" fill="currentColor" />
                 </div>
                 <div className="w-full md:w-1/2 md:pl-12">
-                  <div className="rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 relative h-48 md:h-full md:min-h-[12rem]">
+                  <div className="rounded-2xl overflow-hidden shadow-lg relative h-48 md:h-full md:min-h-[12rem]">
                     <Image
                       src="/images/about_modern_dessert.jpg"
                       alt="現代のデザート"
