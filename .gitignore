@@ -43,3 +43,6 @@ next-env.d.ts
 # AI assistants
 .claude/
 .agent/
+
+# Local-only files kept on this PC; never push them to GitHub
+/local_only/
